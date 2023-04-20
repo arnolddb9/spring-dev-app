@@ -59,18 +59,14 @@ class ClienteServiceTest {
         clienteDtoInicial.setApellido("SALAZAR");
         clienteService.actualizarCliente(clienteDtoInicial);
         ClienteDto clienteDtoLuegoDeUpdate = clienteService.obtenerCliente(1);
-        System.out.println("El cliente inicial es: "+ clienteDtoLuegoDeUpdate.getApellido());
+        System.out.println("El cliente final es: "+ clienteDtoLuegoDeUpdate.getApellido());
         assertEquals("SALAZAR", clienteDtoLuegoDeUpdate.getApellido());
     }
 
     @Test
     void obtenerClientes() {
-        clienteService.obtenerClientes().stream().map(
-                cliente ->{
-                    System.out.println(">>>>>>> Cliente :" + cliente.getApellido());
-                    return cliente;
-                }
-        ).collect(Collectors.toList());
-        assertEquals(1,1);
+        List<ClienteDto> clienteDtos = clienteService.obtenerClientes();
+        clienteDtos.forEach(cliente -> System.out.println("Cliente: " + cliente.getApellido()));
+        assertEquals(2, clienteDtos.size());
     }
 }
