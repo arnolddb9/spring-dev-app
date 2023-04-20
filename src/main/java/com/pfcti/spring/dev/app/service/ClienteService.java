@@ -102,4 +102,14 @@ public class ClienteService {
    // public ClienteDto buscarClientePorID(int id){
 
    // }
+
+    public List<ClienteDto> obtenerClientesPorCosigoISOPaisYCuentasActivas(String codigoISOPais){
+        List<ClienteDto> clienteDtos= new ArrayList<>();
+        List<Cliente> clientes = clienteRepository.findClientesByPaisAndCuentas_EstadoIsTrue(codigoISOPais);
+        clientes.forEach(cliente -> {
+            clienteDtos.add(fromClienteToClienteDto(cliente));
+        });
+        return clienteDtos;
+    }
+
 }

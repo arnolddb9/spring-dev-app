@@ -69,4 +69,13 @@ class ClienteServiceTest {
         clienteDtos.forEach(cliente -> System.out.println("Cliente: " + cliente.getApellido()));
         assertEquals(2, clienteDtos.size());
     }
+
+    @Test
+    void obtenerClientesPorCosigoISOPaisYCuentasActivas() {
+        List<ClienteDto> clienteDtos= clienteService.obtenerClientesPorCosigoISOPaisYCuentasActivas("CR");
+        clienteDtos.forEach(clienteDto -> {
+            System.out.println("Cliente; " + clienteDto.getApellido());
+        });
+        assertEquals(1,1);
+    }
 }
