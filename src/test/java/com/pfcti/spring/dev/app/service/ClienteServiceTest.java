@@ -78,4 +78,10 @@ class ClienteServiceTest {
         });
         assertEquals(1,1);
     }
+
+    @Test
+    void eliminarCliente() {
+        clienteService.eliminarCliente(1);
+        assertEquals(1,1);
+    }
 }
