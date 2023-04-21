@@ -113,4 +113,12 @@ class ClienteServiceTest {
         System.out.println("nombre  " +clienteDto.getNombre());
         assertEquals(1,1);
     }
+
+    @Test
+    void findByApellidoAndNombre() {
+        List<ClienteDto> clienteDtos= clienteService.findByApellidoAndNombre("SANCHEZ", "RAUL");
+        System.out.println("Cliente "+ clienteDtos.get(0).getNombre());
+        assertFalse(clienteDtos.isEmpty());
+        assertEquals(1,1);
+    }
 }

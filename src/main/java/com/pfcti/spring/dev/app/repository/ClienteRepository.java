@@ -20,4 +20,7 @@ public interface ClienteRepository extends JpaRepository<Cliente,Integer> {
     @Query(value = "update Cliente c set c.nombre=:nombre where  c.apellido=:apellido")
     void updateClienteByQuery(String nombre, String apellido);
 
+
+    List<Cliente> findByApellidoAndNombre (String apellido, String nombre);
+
 }

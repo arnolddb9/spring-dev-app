@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -119,6 +120,14 @@ public class ClienteService {
 
     public void updateClienteByQuery (String nombre,String apellido){
         clienteRepository.updateClienteByQuery(nombre,apellido);
+    }
+
+    public List<ClienteDto> findByApellidoAndNombre (String apellido, String nombre){
+        return clienteRepository
+                .findByApellidoAndNombre(apellido,nombre)
+                .stream()
+                .map(this::fromClienteToClienteDto)
+                .collect(Collectors.toList());
     }
 
 }
