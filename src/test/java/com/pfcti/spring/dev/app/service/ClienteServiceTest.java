@@ -84,4 +84,33 @@ class ClienteServiceTest {
         clienteService.eliminarCliente(1);
         assertEquals(1,1);
     }
+
+    @Test
+    void buscarPorApellido() {
+        List<ClienteDto> clienteDtos = clienteService.obtenerClientes();
+        ClienteDto clienteDto= clienteService.obtenerCliente(1);
+        List<ClienteDto> clienteDtosApellidos =  clienteService.buscarPorApellido(clienteDto.getApellido());
+        clienteDtosApellidos.forEach(cliente -> System.out.println("Cliente: " + cliente.getNombre()));
+        assertEquals(1,1);
+
+    }
+
+    @Test
+    void buscarPorApellidosQueryNativo() {
+        List<ClienteDto> clienteDtos = clienteService.obtenerClientes();
+        ClienteDto clienteDto= clienteService.obtenerCliente(1);
+        List<ClienteDto> clienteDtosApellidos =  clienteService.buscarPorApellidosQueryNativo(clienteDto.getApellido());
+        clienteDtosApellidos.forEach(cliente -> System.out.println("Cliente: " + cliente.getNombre()));
+        assertEquals(1,1);
+    }
+
+    @Test
+    void updateClienteByQuery() {
+        ClienteDto clienteDto= clienteService.obtenerCliente(1);
+        System.out.println("nombre  " +clienteDto.getNombre());
+        clienteService.updateClienteByQuery("Julian",clienteDto.getApellido());
+        clienteDto= clienteService.obtenerCliente(1);
+        System.out.println("nombre  " +clienteDto.getNombre());
+        assertEquals(1,1);
+    }
 }

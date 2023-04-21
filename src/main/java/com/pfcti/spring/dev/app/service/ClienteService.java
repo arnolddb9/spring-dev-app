@@ -3,6 +3,7 @@ package com.pfcti.spring.dev.app.service;
 import com.pfcti.spring.dev.app.dto.ClienteDto;
 import com.pfcti.spring.dev.app.model.Cliente;
 import com.pfcti.spring.dev.app.repository.*;
+import jakarta.persistence.Tuple;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -91,6 +92,33 @@ public class ClienteService {
             clienteDtos.add(fromClienteToClienteDto(cliente));
         });
         return clienteDtos;
+    }
+    public List<ClienteDto> buscarPorApellido (String apellido){
+        List<ClienteDto> clienteDtos= new ArrayList<>();
+        List<Cliente> clientes= clienteRepository.buscarPorApellido(apellido);
+        clientes.forEach(cliente -> {
+            clienteDtos.add(fromClienteToClienteDto(cliente));
+        });
+        return clienteDtos;
+    }
+
+    public List<ClienteDto> buscarPorApellidosQueryNativo (String apellido){
+        List<ClienteDto> clienteDtos= new ArrayList<>();
+        List<Tuple> tuples= clienteRepository.buscarPorApellidosQueryNativo(apellido);
+        tuples.forEach(tuple -> {
+            ClienteDto clienteDto = new ClienteDto();
+            clienteDto.setApellido((String) tuple.get("apellido"));
+            clienteDto.setNombre((String) tuple.get("nombre"));
+            clienteDto.setCedula((String) tuple.get("cedula"));
+            clienteDto.setTelefono((String) tuple.get("telefono"));
+            clienteDto.setId((Integer) tuple.get("id"));
+            clienteDtos.add(clienteDto);
+        });
+        return clienteDtos;
+    }
+
+    public void updateClienteByQuery (String nombre,String apellido){
+        clienteRepository.updateClienteByQuery(nombre,apellido);
     }
 
 }
