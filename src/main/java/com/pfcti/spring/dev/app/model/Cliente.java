@@ -31,5 +31,8 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")//, cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
     private List<Cuenta> cuentas;
 
+    @OneToMany(mappedBy = "cliente")//, cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
+    private List<Tarjeta> tarjetas;
+
 
 }

@@ -23,4 +23,6 @@ public interface ClienteRepository extends JpaRepository<Cliente,Integer> {
 
     List<Cliente> findByApellidoAndNombre (String apellido, String nombre);
 
+    List<Cliente> findClientesByPaisNotAndTarjetas_EstadoIsFalse(String pais);
+
 }

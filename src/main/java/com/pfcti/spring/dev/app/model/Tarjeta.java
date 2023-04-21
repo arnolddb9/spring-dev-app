@@ -17,6 +17,8 @@ public class Tarjeta {
     private  String numero;
     @Column
     private String  tipo;
+    @Column
+    private boolean  estado;
 
     @ManyToOne
     @JoinColumn(name="cliente_id", referencedColumnName = "id")

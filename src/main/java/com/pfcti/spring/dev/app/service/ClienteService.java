@@ -130,4 +130,13 @@ public class ClienteService {
                 .collect(Collectors.toList());
     }
 
+    public List<ClienteDto>findClientesByPaisNotAndTarjetas_EstadoIsFalse(String codigoISOPais){
+        List<ClienteDto> clienteDtos = new ArrayList<>();
+        List<Cliente> clientes = clienteRepository.findClientesByPaisNotAndTarjetas_EstadoIsFalse(codigoISOPais);
+        clientes.forEach(cliente -> {
+            clienteDtos.add(fromClienteToClienteDto(cliente));
+        });
+        return clienteDtos;
+    }
+
 }

@@ -121,4 +121,13 @@ class ClienteServiceTest {
         assertFalse(clienteDtos.isEmpty());
         assertEquals(1,1);
     }
+
+    @Test
+    void findClientesByPaisNotAndTarjetas_EstadoIsFalse() {
+        List<ClienteDto> clienteDtos= clienteService.findClientesByPaisNotAndTarjetas_EstadoIsFalse("CR");
+        clienteDtos.forEach(clienteDto -> {
+            System.out.println("Cliente; " + clienteDto.getApellido());
+        });
+        assertEquals(1,1);
+    }
 }
