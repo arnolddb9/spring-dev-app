@@ -130,4 +130,32 @@ class ClienteServiceTest {
         });
         assertEquals(1,1);
     }
+
+    @Test
+    void buscarDinamicamentePorCriteriaDeBusqueda() {
+        ClienteDto clienteDto1 = new ClienteDto();
+        clienteDto1.setApellido("SANCHEZ");
+        List<ClienteDto> clienteDtos= clienteService.buscarDinamicamentePorCriteriaDeBusqueda( clienteDto1);
+        clienteDtos.forEach(clienteDto -> {
+            System.out.println("Cliente; "+ clienteDto.getNombre()+" " + clienteDto.getApellido());
+        });
+
+        clienteDto1 = new ClienteDto();
+        clienteDto1.setNombre("ROBERTO");
+        List<ClienteDto> clienteDtos1= clienteService.buscarDinamicamentePorCriteriaDeBusqueda( clienteDto1);
+        clienteDtos1.forEach(clienteDto -> {
+            System.out.println("Cliente; "+ clienteDto.getNombre()+" " + clienteDto.getApellido());
+        });
+
+        clienteDto1 = new ClienteDto();
+        clienteDto1.setCedula("1");
+        clienteDto1.setNombre("RAUL");
+        List<ClienteDto> clienteDtos2= clienteService.buscarDinamicamentePorCriteriaDeBusqueda( clienteDto1);
+        clienteDtos2.forEach(clienteDto -> {
+            System.out.println("Cliente; "+ clienteDto.getNombre()+" " + clienteDto.getApellido());
+        });
+
+
+        assertTrue(clienteDtos.size()<=2);
+    }
 }

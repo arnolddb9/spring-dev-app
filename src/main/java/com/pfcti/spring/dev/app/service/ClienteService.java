@@ -1,5 +1,6 @@
 package com.pfcti.spring.dev.app.service;
 
+import com.pfcti.spring.dev.app.criteria.ClienteSpecification;
 import com.pfcti.spring.dev.app.dto.ClienteDto;
 import com.pfcti.spring.dev.app.model.Cliente;
 import com.pfcti.spring.dev.app.repository.*;
@@ -22,7 +23,7 @@ public class ClienteService {
     private TarjetaRepository tarjetaRepository;
     private InversionRepository inversionRepository;
     private DireccionRepository direccionRepository;
-
+    private ClienteSpecification clienteSpecification;
     public void insertarCliente(ClienteDto clienteDto) {
 
         Cliente cliente = new Cliente();
@@ -137,6 +138,14 @@ public class ClienteService {
             clienteDtos.add(fromClienteToClienteDto(cliente));
         });
         return clienteDtos;
+    }
+
+    public List<ClienteDto> buscarDinamicamentePorCriteriaDeBusqueda(ClienteDto clienteDtoFilter){
+        return clienteRepository
+                .findAll(clienteSpecification.buildFilter(clienteDtoFilter))
+                .stream()
+                .map(this::fromClienteToClienteDto)
+                .collect(Collectors.toList());
     }
 
 }
