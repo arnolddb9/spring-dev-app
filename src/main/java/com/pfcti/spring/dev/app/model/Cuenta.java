@@ -18,7 +18,7 @@ public class Cuenta {
     @Column
     private String  tipo;
     @Column
-    private boolean  estado;
+    private Boolean  estado;
 
     @ManyToOne
     @JoinColumn(name="cliente_id", referencedColumnName = "id")
