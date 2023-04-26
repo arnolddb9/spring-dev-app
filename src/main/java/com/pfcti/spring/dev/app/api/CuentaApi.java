@@ -32,9 +32,9 @@ public class CuentaApi {
     }
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void guardarCuenta(@Valid @RequestBody CuentaDto cuentaDto, int idCliente){
+    public void guardarCuenta(@Valid @RequestBody CuentaDto cuentaDto){
         log.info("cuenta a guardar: {}", cuentaDto);
-        cuentaService.insertarCuenta(cuentaDto, idCliente);
+        cuentaService.insertarCuenta(cuentaDto);
     }
 
 }

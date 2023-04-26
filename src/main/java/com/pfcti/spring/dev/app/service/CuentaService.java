@@ -40,9 +40,9 @@ public class CuentaService {
         return cuentaDtos;
     }
 
-    public void insertarCuenta(CuentaDto cuentaDto, int idCliente) {
+    public void insertarCuenta(CuentaDto cuentaDto) {
         Cliente cliente= new Cliente();
-        cliente.setId(idCliente);
+        cliente.setId(cuentaDto.getClienteId());
         Cuenta cuenta = new Cuenta();
         //cuenta.setId(cuentaDto.getId());
         cuenta.setTipo(cuentaDto.getTipo());
