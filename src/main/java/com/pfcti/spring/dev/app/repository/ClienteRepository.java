@@ -30,4 +30,5 @@ public interface ClienteRepository extends JpaRepository<Cliente,Integer>, JpaSp
 
     List<Cliente> findClientesByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase (String nombre, String apellido);
 
+
 }
