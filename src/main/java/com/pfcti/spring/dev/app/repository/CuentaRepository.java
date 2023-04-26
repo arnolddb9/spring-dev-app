@@ -15,7 +15,7 @@ import java.util.List;
 public interface CuentaRepository extends JpaRepository<Cuenta,Integer>, JpaSpecificationExecutor<Cuenta> {
     void deleteAllByCliente_id(int clienteId);
     @Modifying
-    @Query(value = "update Cuenta c set c.estado=:false where  c.numero=:numero")
+    @Query(value = "update Cuenta c set c.estado=false where  c.numero=:numero")
     void updateCuentaEstadoByNumeroQuery(String numero);
 
     List<Cuenta> findCuentaByCliente_Id(int idCliente );
