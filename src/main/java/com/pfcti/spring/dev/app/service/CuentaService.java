@@ -28,7 +28,7 @@ public class CuentaService {
 
     public void updateCuentaEstadoByNumeroQuery(String numero){
 
-        cuentaRepository.updateCuentaEstadoByNumeroQuery(numero);
+        cuentaRepository.updateCuentaEstadoByNumeroQuery(numero, false);
     }
 
     public List<CuentaDto>findCuentaByCliente_Id (int id){
