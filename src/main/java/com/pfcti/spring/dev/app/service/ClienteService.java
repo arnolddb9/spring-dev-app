@@ -24,6 +24,7 @@ public class ClienteService {
     private InversionRepository inversionRepository;
     private DireccionRepository direccionRepository;
     private ClienteSpecification clienteSpecification;
+
     public void insertarCliente(ClienteDto clienteDto) {
 
         Cliente cliente = new Cliente();
@@ -97,18 +98,19 @@ public class ClienteService {
         });
         return clienteDtos;
     }
-    public List<ClienteDto> buscarPorApellido (String apellido){
-        List<ClienteDto> clienteDtos= new ArrayList<>();
-        List<Cliente> clientes= clienteRepository.buscarPorApellido(apellido);
+
+    public List<ClienteDto> buscarPorApellido(String apellido) {
+        List<ClienteDto> clienteDtos = new ArrayList<>();
+        List<Cliente> clientes = clienteRepository.buscarPorApellido(apellido);
         clientes.forEach(cliente -> {
             clienteDtos.add(fromClienteToClienteDto(cliente));
         });
         return clienteDtos;
     }
 
-    public List<ClienteDto> buscarPorApellidosQueryNativo (String apellido){
-        List<ClienteDto> clienteDtos= new ArrayList<>();
-        List<Tuple> tuples= clienteRepository.buscarPorApellidosQueryNativo(apellido);
+    public List<ClienteDto> buscarPorApellidosQueryNativo(String apellido) {
+        List<ClienteDto> clienteDtos = new ArrayList<>();
+        List<Tuple> tuples = clienteRepository.buscarPorApellidosQueryNativo(apellido);
         tuples.forEach(tuple -> {
             ClienteDto clienteDto = new ClienteDto();
             clienteDto.setApellido((String) tuple.get("apellido"));
@@ -121,19 +123,19 @@ public class ClienteService {
         return clienteDtos;
     }
 
-    public void updateClienteByQuery (String nombre,String apellido){
-        clienteRepository.updateClienteByQuery(nombre,apellido);
+    public void updateClienteByQuery(String nombre, String apellido) {
+        clienteRepository.updateClienteByQuery(nombre, apellido);
     }
 
-    public List<ClienteDto> findByApellidoAndNombre (String apellido, String nombre){
+    public List<ClienteDto> findByApellidoAndNombre(String apellido, String nombre) {
         return clienteRepository
-                .findByApellidoAndNombre(apellido,nombre)
+                .findByApellidoAndNombre(apellido, nombre)
                 .stream()
                 .map(this::fromClienteToClienteDto)
                 .collect(Collectors.toList());
     }
 
-    public List<ClienteDto>findClientesByPaisNotAndTarjetas_EstadoIsFalse(String codigoISOPais){
+    public List<ClienteDto> findClientesByPaisNotAndTarjetas_EstadoIsFalse(String codigoISOPais) {
         List<ClienteDto> clienteDtos = new ArrayList<>();
         List<Cliente> clientes = clienteRepository.findClientesByPaisNotAndTarjetas_EstadoIsFalse(codigoISOPais);
         clientes.forEach(cliente -> {
@@ -142,12 +144,27 @@ public class ClienteService {
         return clienteDtos;
     }
 
-    public List<ClienteDto> buscarDinamicamentePorCriteriaDeBusqueda(ClienteDto clienteDtoFilter){
+    public List<ClienteDto> buscarDinamicamentePorCriteriaDeBusqueda(ClienteDto clienteDtoFilter) {
         return clienteRepository
                 .findAll(clienteSpecification.buildFilter(clienteDtoFilter))
                 .stream()
                 .map(this::fromClienteToClienteDto)
                 .collect(Collectors.toList());
+    }
+
+    public io.spring.guides.gs_producing_web_service.Cliente obtenerClienteSoap(int idCliente) {
+        Cliente cliente = clienteRepository.findById(idCliente)
+                .orElseThrow(() -> {
+                    throw new RuntimeException("Cliente No Existe");
+                });
+        io.spring.guides.gs_producing_web_service.Cliente clienteWs = new io.spring.guides.gs_producing_web_service.Cliente();
+        clienteWs.setId(cliente.getId());
+        clienteWs.setApellido(cliente.getApellido());
+        clienteWs.setNombre(cliente.getNombre());
+        clienteWs.setCedula(cliente.getCedula());
+        clienteWs.setTelefono(cliente.getTelefono());
+        clienteWs.setPais(cliente.getPais());
+        return clienteWs;
     }
 
 
