@@ -32,6 +32,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 	implementation 'org.springframework.boot:spring-boot-starter-artemis'
 	implementation 'org.apache.activemq:artemis-jakarta-server'
+	implementation 'org.springframework.boot:spring-boot-starter-integration'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-test'
 	jaxb("org.glassfish.jaxb:jaxb-xjc")
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
