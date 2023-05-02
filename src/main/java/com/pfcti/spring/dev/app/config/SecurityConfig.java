@@ -22,7 +22,7 @@ public class SecurityConfig {
     }*/
 
 
-    @Bean
+    /*@Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withUsername("user")
@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .roles("USER", "ADMIN")
                 .build());
         return manager;
-    }
+    }*/
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -40,7 +40,11 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.DELETE)
                 .hasRole("ADMIN").requestMatchers("/v1/api/cliente/**", "/v1/api/employee/**").hasAnyRole("USER", "ADMIN").requestMatchers("v1/api/login/**")
-                .anonymous().anyRequest().authenticated().and().httpBasic();
+                .anonymous().anyRequest().authenticated().and().oauth2ResourceServer().jwt()
+                .jwtAuthenticationConverter(new CustomJwtAuthenticationConverter());
+
+        http.oauth2Login();
+
         return http.build();
     }
 

@@ -35,6 +35,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	jaxb("org.glassfish.jaxb:jaxb-xjc")
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
