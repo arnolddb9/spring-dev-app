@@ -38,6 +38,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	//Actuator module is required for tracing to operate
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation platform('io.micrometer:micrometer-tracing-bom:latest.release')
+	implementation 'io.micrometer:micrometer-tracing'
+	implementation 'io.micrometer:micrometer-observation'
+	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+
 	jaxb("org.glassfish.jaxb:jaxb-xjc")
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
